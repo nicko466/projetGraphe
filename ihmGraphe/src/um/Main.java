@@ -16,7 +16,7 @@ import ui.*;
 public class Main {
     
     
-    static Graphe graphe;
+    public static Graphe graphe;
     /**
      * @param args the command line arguments
      */

@@ -43,7 +43,7 @@ public mainWindow(){
     noeud1 = new JButton("N1");
     noeud2 = new JButton("N2");
     gm = new DefaultGraphModel(Main.graphe.sommets, AttributeMap.emptyAttributeMap);
-    graph = new JGraph();
+    graph = new JGraph(gm);
     
     
     
