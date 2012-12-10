@@ -4,12 +4,15 @@ import java.util.List;
 
 public class Graphe {
 
-  public List Sommets;
-  public List Aretes;
+  public List sommets;
+  public List aretes;
   public Noeud racine;
   public Noeud courant;
 
-  public void graphe() {
+  public void Graphe() {
+        racine = new Noeud(Type.User, "Task_"+sommets.size());
+        sommets.add(racine);
+        courant = racine;
   }
 
   public void add(Type type) {

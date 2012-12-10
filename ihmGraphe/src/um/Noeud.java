@@ -6,11 +6,16 @@ public class Noeud {
 
   private Type type;
 
-  public String name;
+  private String name;
 
-  public Point position;
+  private Point position;
+  
+  private int level
 
-  public void noeud(Type type, String name) {
+  public Noeud(Type type, String name) {
+      this.type = type;
+      this.name = name;
+      //TODO ouvrir une fenêtre d'interaction
   }
 
 }
