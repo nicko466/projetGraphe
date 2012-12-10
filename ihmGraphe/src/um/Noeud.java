@@ -9,13 +9,32 @@ public class Noeud {
   private String name;
 
   private Point position;
-  
-  private int level
 
-  public Noeud(Type type, String name) {
+    public String getName() {
+        return name;
+    }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public Type getType() {
+        return type;
+    }
+    
+    public int getLevel() {
+        return level;
+    }
+  
+  private int level;
+
+  public Noeud(Type type, String name, int level, Point position) {
       this.type = type;
       this.name = name;
+      this.level = level;
+      this.position = position;
       //TODO ouvrir une fenêtre d'interaction
   }
 
+  
 }
