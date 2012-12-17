@@ -22,6 +22,7 @@ public class Main {
      */
     public static void main(String[] args) {
         graphe = new Graphe();
-        new mainWindow();
+        mainWindow main = new mainWindow();
+        
     }
 }
