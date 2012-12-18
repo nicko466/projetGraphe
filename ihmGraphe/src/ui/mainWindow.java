@@ -8,11 +8,18 @@ package ui;
  *
  * @author nicko2
  */
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.view.mxGraph;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -22,19 +29,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
 import org.jgraph.JGraph;
+import org.jgraph.graph.DefaultEdge;
+import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultGraphModel;
+import org.jgraph.graph.DefaultPort;
 import um.*;
 
 public class mainWindow extends JFrame implements ActionListener {
 
     private JPanel jContentPane = null;
     JPanel north;
-    JPanel west;
-    JButton bouton = new JButton("test");
+    JPanel south;
     JGraph graph;
+    mxGraph graphx;
+    mxGraphComponent graphComponent;
+    Object parent;
     JScrollPane scrollPane;
     DefaultGraphModel gm;
     JMenuBar barreMenu = null;
@@ -48,18 +59,26 @@ public class mainWindow extends JFrame implements ActionListener {
     JToolBar barH = null;
     JButton btnNoeud = null;
     JButton btnArete = null;
+    JButton jbtnNew = null;
+    JButton jbtnOpen = null;
+    JButton jbtnSave = null;
+    JButton jbtnExit = null;
+    JButton jbtnCopy = null;
     File file = null;
     JFileChooser choixFichier = new JFileChooser();
     Noeud noeud;
     Arete arete;
+    Graphe graphe;
+    Dialogue diag;
+    DefaultGraphCell myCell;
     Cursor curseurDefaut = new Cursor(Cursor.DEFAULT_CURSOR);
     Cursor curseurMain = new Cursor(Cursor.HAND_CURSOR);
-    public static int ETAT = 0;
 
     public mainWindow() {
 
         super();
         initialize();
+
     }
 
     // methode pour initialiser la barre des menus
@@ -70,7 +89,6 @@ public class mainWindow extends JFrame implements ActionListener {
             barreMenu.add(getFile());
             barreMenu.add(getEdit());
         }
-
         return barreMenu;
     }
 
@@ -82,6 +100,7 @@ public class mainWindow extends JFrame implements ActionListener {
             nouveau = new JMenuItem("Nouveau");
             ouvrir = new JMenuItem("Ouvrir...");
             quitter = new JMenuItem("Quitter");
+
             sauvegarder = new JMenuItem("Enregistrer");
 
             fichier = new JMenu();
@@ -114,16 +133,17 @@ public class mainWindow extends JFrame implements ActionListener {
 
             bar = new JToolBar();
 
-            bar.setPreferredSize(new java.awt.Dimension(70, 150));
-            bar.setName("ToolBar");
-            bar.setOrientation(JToolBar.VERTICAL);
-            bar.setLocation(new java.awt.Point(0, 0));
-            
-            bar.setFloatable(false);
+            bar.setName("Barre flottante");
+            bar.setOrientation(JToolBar.HORIZONTAL);
+            bar.setSize(new java.awt.Dimension(120, 40));
+            bar.setPreferredSize(new java.awt.Dimension(200, 40));
+            bar.setLocation(new java.awt.Point(25, 0));
+            bar.setFloatable(true);
 
             // moche..
-            bar.add(getBtnNoeud());
-            bar.add(getBtnArete());
+            bar.add(getBtnAjouter());
+            bar.add(getBtnSupprimer());
+
         }
         return bar;
     }
@@ -134,79 +154,66 @@ public class mainWindow extends JFrame implements ActionListener {
             barH.setLocation(new java.awt.Point(25, 0));
             barH.setSize(new java.awt.Dimension(200, 40));
             barH.setFloatable(false);
-            
-            barH.add(bouton);
-            
+
+            north.add(jbtnNew);
+            north.add(jbtnOpen);
+            north.add(jbtnSave);
+            north.add(jbtnExit);
+            north.add(jbtnCopy);
+
         }
         return barH;
     }
 
-    private JButton getBtnNoeud() {
+    private JButton getBtnAjouter() {
 
         if (btnNoeud == null) {
 
-            ImageIcon icon = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));            
-            btnNoeud = new JButton(icon);
+            btnNoeud = new JButton(" + ");
 
-            //btnNoeud.setText("Noeud");
-            btnNoeud.setPreferredSize(new java.awt.Dimension(32, 32));
-            btnNoeud.setToolTipText("Ajouter Noeud");
+            btnNoeud.setToolTipText("Ajouter un noeud");
 
             btnNoeud.addActionListener(new java.awt.event.ActionListener() {
 
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
-                    System.out.println("actionPerformed()");
-                    if (ETAT != 1) {
-                        ETAT = 1;
-                        System.out.println("etat 1 du bouton noeud");
-                        //btnArete.setSelected(false);
-                        setCursor(curseurMain);
-                    } else {
-                        ETAT = 0;
-                        System.out.println("etat 0 du bouton noeud");
-                        setCursor(curseurDefaut);
-                    }
+
+                    diag = new Dialogue("Relation entre noeud");
+                    
+                    //ajouter();
+                    setCursor(curseurMain);
                 }
             });
         }
         return btnNoeud;
     }
 
-    
-    // si on veut un bouton enfoncé : JToggleButton
-    private JButton getBtnArete() {
-        
+    // (si on veut un bouton enfoncé : JToggleButton)
+    private JButton getBtnSupprimer() {
+
         if (btnArete == null) {
 
-            ImageIcon icon = new ImageIcon(this.getClass().getResource("/image/iconeArete.jpg"));         
-            btnArete = new JButton(icon);
+            btnArete = new JButton(" - ");
 
             //btnArete.setText("Arete");
-            btnArete.setPreferredSize(new java.awt.Dimension(32, 35));
-            btnArete.setToolTipText("Ajouter une relation");
+            btnArete.setPreferredSize(new java.awt.Dimension(2, 2));
+            btnArete.setToolTipText("Supprimer un noeud");
 
             btnArete.addActionListener(new java.awt.event.ActionListener() {
 
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                    if (ETAT != 2) {
-                        ETAT = 2;
-                        System.out.println("etat 2 du bouton arete : " + ETAT);
-                        //btnNoeud.setSelected(false);
-                        setCursor(curseurMain);
-                    } else {
-                        ETAT = 0;
-                        System.out.println("etat 0 du bouton arete");
-                        setCursor(curseurDefaut);
-                    }
-                    btnArete.setSelected(false);
+                    setCursor(curseurMain);
+
                 }
             });
         }
         return btnArete;
     }
 
-    private JPanel getJContentPane() {
+    // JPanel principal composé de nord et sud
+    public JPanel getJContentPane() {
         if (jContentPane == null) {
 
             jContentPane = new JPanel();
@@ -216,19 +223,92 @@ public class mainWindow extends JFrame implements ActionListener {
 
             //placement des JPanel et du scrollPane
             jContentPane.add(north, java.awt.BorderLayout.NORTH);
-            jContentPane.add(west, java.awt.BorderLayout.WEST);
-            jContentPane.add(scrollPane, java.awt.BorderLayout.CENTER);
+            jContentPane.add(south, java.awt.BorderLayout.PAGE_END);
+
 
         }
         return jContentPane;
     }
 
-    private void initialize() {
+    void open() {
+        choixFichier.showOpenDialog(null);
+        if (choixFichier.getSelectedFile() != null) {
+            file = choixFichier.getSelectedFile();
+            try {
+                FileInputStream fis = new FileInputStream(file);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                ois.close();
 
+            } catch (Exception err) {
+                System.out.println("Erreur" + err);
+            }
+        }
+    }
+
+    void save() {
+        if (file != null) {
+            try {
+                FileOutputStream fis = new FileOutputStream(file);
+                ObjectOutputStream ois = new ObjectOutputStream(fis);
+                ois.close();
+            } catch (Exception err) {
+                System.out.println("Erreur" + err);
+            }
+        } else {
+            saveAs();
+        }
+    }
+
+    void saveAs() {
+        choixFichier.showSaveDialog(null);
+        if (choixFichier.getSelectedFile() != null) {
+            file = choixFichier.getSelectedFile();
+            try {
+                FileOutputStream fis = new FileOutputStream(file);
+                ObjectOutputStream ois = new ObjectOutputStream(fis);
+                ois.close();
+            } catch (Exception err) {
+                System.out.println("Erreur" + err);
+            }
+        }
+    }
+    
+
+    void ajouter() {
+        
+        // ajoute les composants au JPanel principal
+        getJContentPane().add(graphComponent);
+
+        
+        graphx.getModel().beginUpdate();
+        Object parent2 = graphx.getDefaultParent();
+        graphx.insertVertex(parent2, null, "test", 400, 20 + getX(), 80, 20);
+        //graphComponent.setConnectable(false);
+        
+        graphx.getModel().endUpdate();
+    }
+
+    private void initialize() {
 
         //initialisation des attributs
         north = new JPanel();
-        west = new JPanel();
+        south = new JPanel();
+
+        //création icon des boutons
+        ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+        ImageIcon icon2 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+        ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+        ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+
+
+        //initialisation les boutons de la barre du haut
+        jbtnNew = new JButton(icon1);;
+        jbtnOpen = new JButton(icon2);
+        jbtnSave = new JButton(icon3);
+        jbtnExit = new JButton(icon4);
+        jbtnCopy = new JButton(icon5);
+
 
         //Définit un titre pour notre fenêtre
         this.setTitle("Graphe");
@@ -236,13 +316,8 @@ public class mainWindow extends JFrame implements ActionListener {
         //fenêtre de taille 900 sur 500
         this.setSize(900, 500);
 
-        graph = new JGraph(gm);
-
-        scrollPane = new JScrollPane(graph);
-
-        this.setContentPane(getJContentPane());
-
-        west.add(getJToolBarV());
+        //ajoute les jToolBars
+        south.add(getJToolBarV());
         north.add(getJToolBarH());
 
         this.setJMenuBar(getJJMenuBar());
@@ -253,11 +328,26 @@ public class mainWindow extends JFrame implements ActionListener {
 
         this.setJMenuBar(getJJMenuBar());
 
+        this.setContentPane(getJContentPane());
 
+        // initialise le graphe
+        graphx = new mxGraph();
+        // initialise les composants du graphe
+        graphComponent = new mxGraphComponent(graphx);
+        graphComponent.setSize(new Dimension(400, 400));
 
-        //java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setLocation((screenSize.width - getSize().width) / 2, (screenSize.height - getSize().height) / 2);
-        // this.setJMenuBar(getMenu());
+        // ajoute les composants au JPanel principal
+        getJContentPane().add(graphComponent);
+
+        // chargement du graphe avec une racine
+        graphx.getModel().beginUpdate();
+        parent = graphx.getDefaultParent();
+        graphx.insertVertex(parent, null, "Racine", 400, 20, 80, 20);
+        graphx.getModel().endUpdate();
+
+       
+        
+        this.setContentPane(getContentPane());
 
         this.setVisible(true);
 
