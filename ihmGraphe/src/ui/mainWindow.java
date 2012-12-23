@@ -44,6 +44,7 @@ public class mainWindow extends JFrame implements ActionListener {
     JPanel south;
     JGraph graph;
     mxGraph graphx;
+    Object v0;
     mxGraphComponent graphComponent;
     Object parent;
     JScrollPane scrollPane;
@@ -155,6 +156,7 @@ public class mainWindow extends JFrame implements ActionListener {
             barH.setSize(new java.awt.Dimension(200, 40));
             barH.setFloatable(false);
 
+
             north.add(jbtnNew);
             north.add(jbtnOpen);
             north.add(jbtnSave);
@@ -178,8 +180,8 @@ public class mainWindow extends JFrame implements ActionListener {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                    diag = new Dialogue("Relation entre noeud");
-                    
+                    diag = new Dialogue(new mainWindow(), "Relation entre noeud");
+
                     //ajouter();
                     setCursor(curseurMain);
                 }
@@ -272,23 +274,30 @@ public class mainWindow extends JFrame implements ActionListener {
             }
         }
     }
-    
 
     void ajouter() {
-        
-        // ajoute les composants au JPanel principal
-        getJContentPane().add(graphComponent);
 
-        
+        // ajoute les composants au JPanel principal
+        //getJContentPane().add(graphComponent);
+
+        /*Object v1 = graphx.addVertex( "Hello,", 20, 20, 80, 30);
+        Object v2 = graph.addVertex(parent, null, "World!", 200, 150, 80, 30);
+        Object e1 = graph.addEdge(parent, null, "", v1, v2);*/
+
         graphx.getModel().beginUpdate();
-        Object parent2 = graphx.getDefaultParent();
-        graphx.insertVertex(parent2, null, "test", 400, 20 + getX(), 80, 20);
-        //graphComponent.setConnectable(false);
-        
-        graphx.getModel().endUpdate();
+        try {
+            
+            //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, "World!", 240, 150, 80, 30);
+            graphx.insertEdge(parent, null, "Edge", v0, v2);
+        } finally {
+            graphx.getModel().endUpdate();
+        }
     }
 
     private void initialize() {
+
+
 
         //initialisation des attributs
         north = new JPanel();
@@ -331,23 +340,33 @@ public class mainWindow extends JFrame implements ActionListener {
         this.setContentPane(getJContentPane());
 
         // initialise le graphe
+
         graphx = new mxGraph();
+        Object parent = graphx.getDefaultParent();
+
+
+
+
+        mxGraphComponent graphComponent = new mxGraphComponent(graphx);
+        getContentPane().add(graphComponent);
+
+
         // initialise les composants du graphe
-        graphComponent = new mxGraphComponent(graphx);
-        graphComponent.setSize(new Dimension(400, 400));
+//        graphComponent = new mxGraphComponent(graphx);
+//        graphComponent.setSize(new Dimension(400, 400));
 
         // ajoute les composants au JPanel principal
-        getJContentPane().add(graphComponent);
+        //getJContentPane().add(graphComponent);
 
         // chargement du graphe avec une racine
         graphx.getModel().beginUpdate();
-        parent = graphx.getDefaultParent();
-        graphx.insertVertex(parent, null, "Racine", 400, 20, 80, 20);
+
+        v0 = graphx.insertVertex(parent, null, "Racine", 400, 20, 80, 20);
         graphx.getModel().endUpdate();
 
-       
-        
-        this.setContentPane(getContentPane());
+
+
+        //this.setContentPane(getContentPane());
 
         this.setVisible(true);
 
