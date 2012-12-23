@@ -293,6 +293,7 @@ public class mainWindow extends JFrame implements ActionListener {
         } finally {
             graphx.getModel().endUpdate();
         }
+        
     }
 
     private void initialize() {
