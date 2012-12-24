@@ -27,7 +27,9 @@ public class Graphe {
         courant = noeud;
   }
 
-  public void delete(int arg2) {
+  public void delete() {
+        if(courant!=racine) sommets.remove(courant);
+        courant = racine;
   }
   
   private int countLevel(List<Noeud> listeNoeud, int level){

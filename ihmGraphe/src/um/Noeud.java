@@ -5,8 +5,10 @@ import java.awt.Point;
 public class Noeud {
 
   private Type type;
-  public String name;
-  public Point position;
+
+  private String name;
+
+  private Point position;
 
     public String getName() {
         return name;
@@ -31,7 +33,6 @@ public class Noeud {
       this.name = name;
       this.level = level;
       this.position = position;
-      //TODO ouvrir une fenêtre d'interaction
   }
 
   
