@@ -42,6 +42,7 @@ public class mainWindow extends JFrame implements ActionListener {
     private JPanel jContentPane = null;
     JPanel north;
     JPanel south;
+    JPanel west;
     JGraph graph;
     mxGraph graphx;
     String nomD;
@@ -76,7 +77,6 @@ public class mainWindow extends JFrame implements ActionListener {
     JButton btn6 = null;
     JButton btn7 = null;
     JButton btn8 = null;
-    JButton btn9 = null;
                                 
     
     
@@ -194,11 +194,7 @@ public class mainWindow extends JFrame implements ActionListener {
             bar.setSize(new java.awt.Dimension(120, 40));
             bar.setPreferredSize(new java.awt.Dimension(200, 40));
             bar.setLocation(new java.awt.Point(25, 0));
-            bar.setFloatable(true);
-
-            // TODO : moche..
-            bar.add(getBtnAjouter());
-            bar.add(getBtnSupprimer());
+            bar.setFloatable(false);     
 
         }
         return bar;
@@ -250,8 +246,8 @@ public class mainWindow extends JFrame implements ActionListener {
         if (btnNoeud == null) {
 
             
-            ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));
-            btnNoeud = new JButton(icon1);
+            //ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));
+            btnNoeud = new JButton(" + ");
             btnNoeud.setToolTipText("Ajouter un noeud");
 
             btnNoeud.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +304,6 @@ public class mainWindow extends JFrame implements ActionListener {
             jContentPane.add(north, java.awt.BorderLayout.NORTH);
             jContentPane.add(south, java.awt.BorderLayout.PAGE_END);
 
-
         }
         return jContentPane;
     }
@@ -347,29 +342,44 @@ public class mainWindow extends JFrame implements ActionListener {
 
         v0 = graphx.getSelectionCell();  
         
-        
         graphx.getModel().beginUpdate();
         try {
             
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
             graphx.insertEdge(parent, null,"", v0, v2);
-            graphe.add(Type.User);
         } finally {
             graphx.getModel().endUpdate();
         }
         
     }
+    
+    void ajouterBinaire() {
+
+        Object v[] = graphx.getSelectionCells();
+        
+        
+        graphx.getModel().beginUpdate();
+        try {
+            
+            graphx.insertEdge(parent, null,"", v[0], v[1]);
+            
+        } finally {
+            graphx.getModel().endUpdate();
+        }
+        
+    }    
 
     private void initialize() {
 
 
         
-        graphe = new Graphe();
+        //graphe = new Graphe();
 
         //initialisation des attributs
         north = new JPanel();
         south = new JPanel();
+        west = new JPanel();
 
         //création icon des boutons
         ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));        
@@ -377,6 +387,15 @@ public class mainWindow extends JFrame implements ActionListener {
         ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/save.png"));
         ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/exit.png"));
         ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/Copy.png"));
+        
+        ImageIcon icon6 = new ImageIcon(this.getClass().getResource("/image/choice_.gif"));        
+        ImageIcon icon7 = new ImageIcon(this.getClass().getResource("/image/disabling_.gif"));
+        ImageIcon icon8 = new ImageIcon(this.getClass().getResource("/image/enabling_.gif"));
+        ImageIcon icon9 = new ImageIcon(this.getClass().getResource("/image/enablinginfo_.gif"));
+        ImageIcon icon10 = new ImageIcon(this.getClass().getResource("/image/fullsincro_.gif"));    
+        ImageIcon icon11= new ImageIcon(this.getClass().getResource("/image/interleave_.gif"));        
+        ImageIcon icon12 = new ImageIcon(this.getClass().getResource("/image/sincro_.gif"));
+        ImageIcon icon13= new ImageIcon(this.getClass().getResource("/image/suspend_.gif"));  
 
 
         //initialisation les boutons de la barre du haut
@@ -385,6 +404,15 @@ public class mainWindow extends JFrame implements ActionListener {
         jbtnSave = new JButton(icon3);
         jbtnCopy = new JButton(icon5);
         jbtnExit = new JButton(icon4);
+        
+        btn1 = new JButton(icon6);
+        btn2 = new JButton(icon7);
+        btn3 = new JButton(icon8);
+        btn4 = new JButton(icon9);
+        btn5 = new JButton(icon10); 
+        btn6 = new JButton(icon11);
+        btn7 = new JButton(icon12);
+        btn8 = new JButton(icon13);
         
         
         
@@ -396,8 +424,47 @@ public class mainWindow extends JFrame implements ActionListener {
         this.setSize(900, 500);
 
         //ajoute les jToolBars
-        south.add(getJToolBarV());
+        south.add(getJToolBarV());      
         north.add(getJToolBarH());
+        
+        south.add(getBtnAjouter());
+        south.add(getBtnSupprimer());  
+        south.add(btn1);
+        south.add(btn2);
+        south.add(btn3);
+        south.add(btn4);
+        south.add(btn5);
+        south.add(btn6);
+        south.add(btn7);
+        south.add(btn8);        
+        
+        btn4.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+
+                //v0 =graphx.getSelectionCell();
+
+                setCursor(curseurMain);
+                ajouterBinaire();
+            }
+        });
+        
+        btn2.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+
+                //v0 =graphx.getSelectionCell();
+
+                graphx.removeCells();
+                setCursor(curseurMain);
+            }
+        });        
+            
+        
+        
+        
 
         this.setJMenuBar(getJJMenuBar());
 
