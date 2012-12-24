@@ -1,6 +1,7 @@
 package um;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import um.operation.Binary;
@@ -12,7 +13,7 @@ public class Graphe {
   public List<Arete> aretes;
   public Noeud racine;
   public Noeud courant;
-  public static List<Operator> op;
+  public static ArrayList<Operator> op;
   
   static final int scaleY = 12;
   static final int scaleX = 12;
@@ -21,6 +22,7 @@ public class Graphe {
         racine = new Noeud(Type.User, "Task_"+sommets.size(), 0, new Point(0,0));
         sommets.add(racine);
         courant = racine;
+        this.op = new ArrayList<Operator>();
   }
 
   public void add(Type type) {
@@ -42,6 +44,10 @@ public class Graphe {
             else if(current.getN1() == this.courant) Graphe.op.remove(current);
       }
   }
+  
+  public ArrayList<Operator> getOperator() {
+        return op;
+    }
   
   private int countLevel(List<Noeud> listeNoeud, int level){
       int count = 0;
