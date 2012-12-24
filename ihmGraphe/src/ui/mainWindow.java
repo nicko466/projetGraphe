@@ -361,7 +361,7 @@ public class mainWindow extends JFrame implements ActionListener {
         ImageIcon icon2 = new ImageIcon(this.getClass().getResource("/image/info.png"));
         ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/save.png"));
         ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/exit.png"));
-        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/Copy.png"));
+        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/copy.png"));
 
 
         //initialisation les boutons de la barre du haut
