@@ -3,6 +3,8 @@ package um;
 import java.awt.Point;
 import java.util.Iterator;
 import java.util.List;
+import um.operation.Binary;
+import um.operation.Operator;
 
 public class Graphe {
 
@@ -10,6 +12,7 @@ public class Graphe {
   public List<Arete> aretes;
   public Noeud racine;
   public Noeud courant;
+  public static List<Operator> op;
   
   static final int scaleY = 12;
   static final int scaleX = 12;
@@ -30,6 +33,14 @@ public class Graphe {
   public void delete() {
         if(courant!=racine) sommets.remove(courant);
         courant = racine;
+        Iterator<Operator> it = op.iterator();
+        while(it.hasNext()){
+            Operator current = it.next();
+            if(current instanceof Binary){
+                if(current.getN1() == this.courant || ((Binary) current).getN2() == this.courant) Graphe.op.remove(current);
+            }
+            else if(current.getN1() == this.courant) Graphe.op.remove(current);
+      }
   }
   
   private int countLevel(List<Noeud> listeNoeud, int level){

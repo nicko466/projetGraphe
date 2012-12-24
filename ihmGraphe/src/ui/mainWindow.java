@@ -55,6 +55,7 @@ public class mainWindow extends JFrame implements ActionListener {
     JMenuItem ouvrir = null;
     JMenuItem sauvegarder = null;
     JMenuItem quitter = null;
+    JMenuItem supp = null;
     JToolBar bar = null;
     JToolBar barH = null;
     JButton btnNoeud = null;
@@ -150,7 +151,18 @@ public class mainWindow extends JFrame implements ActionListener {
             edition = new JMenu();
             edition.setText("Edition");
             edition.add("Modifier");
-            edition.add("Supprimer");
+            
+            supp = new JMenuItem("Supprimer");
+            supp.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    graphx.removeCells();
+                }
+            });             
+            
+            edition.add(supp);
+            
         }
         return edition;
     }
@@ -257,6 +269,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
+                    //v0 =graphx.getSelectionCell();
+                    
+                    graphx.removeCells();
                     setCursor(curseurMain);
 
                 }
@@ -298,19 +313,6 @@ public class mainWindow extends JFrame implements ActionListener {
         }
     }
 
-    void save() {
-        if (file != null) {
-            try {
-                FileOutputStream fis = new FileOutputStream(file);
-                ObjectOutputStream ois = new ObjectOutputStream(fis);
-                ois.close();
-            } catch (Exception err) {
-                System.out.println("Erreur" + err);
-            }
-        } else {
-            saveAs();
-        }
-    }
 
     void saveAs() {
         choixFichier.showSaveDialog(null);
@@ -328,12 +330,13 @@ public class mainWindow extends JFrame implements ActionListener {
 
     void ajouter() {
 
-        v0 = graphx.getSelectionCell();
+        v0 = graphx.getSelectionCell();        
         graphx.getModel().beginUpdate();
+        
         try {
             
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
-            Object v2 = graphx.insertVertex(parent, null, "Enfant", 240+this.getX(), 150+this.getY(), 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
             graphx.insertEdge(parent, null, "Edge", v0, v2);
         } finally {
             graphx.getModel().endUpdate();

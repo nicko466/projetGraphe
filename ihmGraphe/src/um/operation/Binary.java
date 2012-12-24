@@ -4,6 +4,7 @@
  */
 package um.operation;
 
+import um.Graphe;
 import um.Noeud;
 
 /**
@@ -12,6 +13,10 @@ import um.Noeud;
  */
 public class Binary extends Operator{
     private Noeud n2;
+
+    public Noeud getN2() {
+        return n2;
+    }
     
     public Binary(String name, Noeud n1, Noeud n2){
         super(name, n1);
