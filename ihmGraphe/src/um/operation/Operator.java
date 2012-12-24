@@ -5,11 +5,11 @@ import um.Noeud;
 
 public class Operator{
     private String name;
-    private Noeud n1;
+    private Object n1;
     
-    public Operator(String name, Noeud n1){
+    public Operator(String name, Object o){
         this.name = name;
-        this.n1 = n1;
+        this.n1 = o;
     }
   
 
