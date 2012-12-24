@@ -90,8 +90,8 @@ public class Dialogue extends JDialog implements ActionListener {
 
 
         jComboBoxRel = new JComboBox();
-        Actualiser();
-        //jComboBoxRel.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        //Actualiser();
+        jComboBoxRel.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
         jComboBoxRel.addActionListener(this);
 
         
