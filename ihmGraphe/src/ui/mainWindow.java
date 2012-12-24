@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -42,8 +42,9 @@ public class mainWindow extends JFrame implements ActionListener {
     private JPanel jContentPane = null;
     JPanel north;
     JPanel south;
-    JPanel west;
-    JGraph graph;
+
+    //JGraph graph;
+
     mxGraph graphx;
     String nomD;
     Object v0;
@@ -85,7 +86,7 @@ public class mainWindow extends JFrame implements ActionListener {
     JFileChooser choixFichier = new JFileChooser();
     Noeud noeud;
     Arete arete;
-    Graphe graphe;
+    Graphe graphe ;
     Dialogue diag;
     DefaultGraphCell myCell;
     Cursor curseurDefaut = new Cursor(Cursor.DEFAULT_CURSOR);
@@ -345,6 +346,7 @@ public class mainWindow extends JFrame implements ActionListener {
         graphx.getModel().beginUpdate();
         try {
             
+            graphe.add(Type.Interaction);
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
             graphx.insertEdge(parent, null,"", v0, v2);
@@ -379,13 +381,13 @@ public class mainWindow extends JFrame implements ActionListener {
         //initialisation des attributs
         north = new JPanel();
         south = new JPanel();
-        west = new JPanel();
 
         //création icon des boutons
         ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));        
         ImageIcon icon2 = new ImageIcon(this.getClass().getResource("/image/info.png"));
         ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/save.png"));
         ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/exit.png"));
+
         ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/Copy.png"));
         
         ImageIcon icon6 = new ImageIcon(this.getClass().getResource("/image/choice_.gif"));        
@@ -396,6 +398,7 @@ public class mainWindow extends JFrame implements ActionListener {
         ImageIcon icon11= new ImageIcon(this.getClass().getResource("/image/interleave_.gif"));        
         ImageIcon icon12 = new ImageIcon(this.getClass().getResource("/image/sincro_.gif"));
         ImageIcon icon13= new ImageIcon(this.getClass().getResource("/image/suspend_.gif"));  
+
 
 
         //initialisation les boutons de la barre du haut
