@@ -12,7 +12,6 @@ import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -31,14 +30,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import org.jgraph.JGraph;
-import org.jgraph.graph.DefaultEdge;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultGraphModel;
-import org.jgraph.graph.DefaultPort;
 import um.*;
 
 public class mainWindow extends JFrame implements ActionListener {
 
+    mainWindow mW ;
+    
     private JPanel jContentPane = null;
     JPanel north;
     JPanel south;
@@ -78,6 +77,7 @@ public class mainWindow extends JFrame implements ActionListener {
     public mainWindow() {
 
         super();
+        this.mW = this;
         initialize();
 
     }
@@ -180,7 +180,7 @@ public class mainWindow extends JFrame implements ActionListener {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
-                    diag = new Dialogue(new mainWindow(), "Relation entre noeud");
+                    diag = new Dialogue(mW, "Relation entre noeud");
 
                     //ajouter();
                     setCursor(curseurMain);
@@ -305,20 +305,19 @@ public class mainWindow extends JFrame implements ActionListener {
         south = new JPanel();
 
         //création icon des boutons
-        ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
-        ImageIcon icon2 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
-        ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
-        ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
-        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/noeud.gif"));
+        ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));        
+        ImageIcon icon2 = new ImageIcon(this.getClass().getResource("/image/info.png"));
+        ImageIcon icon3 = new ImageIcon(this.getClass().getResource("/image/save.png"));
+        ImageIcon icon4 = new ImageIcon(this.getClass().getResource("/image/exit.png"));
+        ImageIcon icon5 = new ImageIcon(this.getClass().getResource("/image/Copy.png"));
 
 
         //initialisation les boutons de la barre du haut
-        jbtnNew = new JButton(icon1);;
+        jbtnNew = new JButton(icon1);
         jbtnOpen = new JButton(icon2);
         jbtnSave = new JButton(icon3);
         jbtnExit = new JButton(icon4);
         jbtnCopy = new JButton(icon5);
-
 
         //Définit un titre pour notre fenêtre
         this.setTitle("Graphe");
