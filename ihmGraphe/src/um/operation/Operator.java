@@ -18,5 +18,7 @@ public class Operator{
         Graphe.op.add(this);
     }
   
-
+    public String getName(){
+        return name;
+    }
 }
