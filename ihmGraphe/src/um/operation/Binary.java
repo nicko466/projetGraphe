@@ -4,17 +4,17 @@
  */
 package um.operation;
 
-import java.util.ArrayList;
+import um.Noeud;
 
 /**
  *
  * @author nicko2
  */
-public class Binary extends Operator {
-
+public class Binary extends Operator{
+    private Noeud n2;
     
-    public ArrayList<BinaryOp> getBinaire() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public Binary(String name, Noeud n1, Noeud n2){
+        super(name, n1);
+        this.n2 = n2;
     }
-    
 }
