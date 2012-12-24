@@ -67,6 +67,20 @@ public class mainWindow extends JFrame implements ActionListener {
     JButton jbtnSave = null;
     JButton jbtnExit = null;
     JButton jbtnCopy = null;
+    
+    JButton btn1 = null;
+    JButton btn2 = null;
+    JButton btn3 = null;
+    JButton btn4 = null;
+    JButton btn5 = null;
+    JButton btn6 = null;
+    JButton btn7 = null;
+    JButton btn8 = null;
+    JButton btn9 = null;
+                                
+    
+    
+    
     File file = null;
     JFileChooser choixFichier = new JFileChooser();
     Noeud noeud;
@@ -247,7 +261,6 @@ public class mainWindow extends JFrame implements ActionListener {
 
                     diag = new Dialogue(mW, "Relation entre noeud");
 
-                    nomD = diag.getName();
                     //ajouter();
                     setCursor(curseurMain);
                 }
@@ -276,7 +289,6 @@ public class mainWindow extends JFrame implements ActionListener {
                     
                     graphx.removeCells();
                     setCursor(curseurMain);
-
                 }
             });
         }
@@ -341,7 +353,8 @@ public class mainWindow extends JFrame implements ActionListener {
             
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
-            graphx.insertEdge(parent, null, nomD, v0, v2);
+            graphx.insertEdge(parent, null,"", v0, v2);
+            graphe.add(Type.User);
         } finally {
             graphx.getModel().endUpdate();
         }
@@ -351,6 +364,8 @@ public class mainWindow extends JFrame implements ActionListener {
     private void initialize() {
 
 
+        
+        graphe = new Graphe();
 
         //initialisation des attributs
         north = new JPanel();

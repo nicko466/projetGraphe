@@ -43,7 +43,7 @@ public class Dialogue extends JDialog implements ActionListener {
     String iconeArete;
     JLabel picture;
     JRadioButton op1;
-    JRadioButton op2;
+    JRadioButton op2;   
     DefaultGraphCell myCell;
     Binary rel;
     Graphe ope;
@@ -97,12 +97,16 @@ public class Dialogue extends JDialog implements ActionListener {
         
         panneauRadio = Box.createVerticalBox();
         rep = new ButtonGroup();
-        op1 = new JRadioButton("Choix 1");
-        //op1.setName("ghj");
-        op2 = new JRadioButton("Choix 2");
+        op1 = new JRadioButton("Iterative task");
+        op1.setName("ghj");
+        op2 = new JRadioButton("Optionnal task");
+        
+        
         op1.setSelected(true);
+        
         rep.add(op1);
         rep.add(op2);
+        
         getContentPane().setLayout(new FlowLayout());
         panneauRadio.add(op2);
         panneauRadio.add(op1);
