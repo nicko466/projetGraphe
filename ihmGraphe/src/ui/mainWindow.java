@@ -99,10 +99,36 @@ public class mainWindow extends JFrame implements ActionListener {
         if (fichier == null) {
 
             nouveau = new JMenuItem("Nouveau");
+            
+            
             ouvrir = new JMenuItem("Ouvrir...");
+            ouvrir.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.open();
+                }
+            });            
+            
+            
             quitter = new JMenuItem("Quitter");
+            quitter.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.dispose();
+                }
+            });            
 
             sauvegarder = new JMenuItem("Enregistrer");
+            sauvegarder.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.saveAs();
+                }
+            });            
+            
 
             fichier = new JMenu();
 
@@ -110,7 +136,7 @@ public class mainWindow extends JFrame implements ActionListener {
 
             fichier.add(nouveau);
             fichier.add(ouvrir);
-            //fichier.add(sauvegarder);
+            fichier.add(sauvegarder);
             fichier.addSeparator();
             fichier.add(quitter);
         }
@@ -136,12 +162,13 @@ public class mainWindow extends JFrame implements ActionListener {
 
             bar.setName("Barre flottante");
             bar.setOrientation(JToolBar.HORIZONTAL);
+            //bar.setLayout(java.awt.BorderLayout.PAGE_END);
             bar.setSize(new java.awt.Dimension(120, 40));
             bar.setPreferredSize(new java.awt.Dimension(200, 40));
             bar.setLocation(new java.awt.Point(25, 0));
             bar.setFloatable(true);
 
-            // moche..
+            // TODO : moche..
             bar.add(getBtnAjouter());
             bar.add(getBtnSupprimer());
 
@@ -156,12 +183,35 @@ public class mainWindow extends JFrame implements ActionListener {
             barH.setSize(new java.awt.Dimension(200, 40));
             barH.setFloatable(false);
 
+            jbtnOpen.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.open();
+                }
+            });             
+            
+            jbtnExit.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.dispose();
+                }
+            }); 
+            
+            jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent e) {
+                    mW.saveAs();
+                }
+            });             
 
             north.add(jbtnNew);
             north.add(jbtnOpen);
+            north.add(jbtnCopy);
             north.add(jbtnSave);
             north.add(jbtnExit);
-            north.add(jbtnCopy);
 
         }
         return barH;
@@ -171,8 +221,9 @@ public class mainWindow extends JFrame implements ActionListener {
 
         if (btnNoeud == null) {
 
-            btnNoeud = new JButton(" + ");
-
+            
+            ImageIcon icon1 = new ImageIcon(this.getClass().getResource("/image/add.jpg"));
+            btnNoeud = new JButton(icon1);
             btnNoeud.setToolTipText("Ajouter un noeud");
 
             btnNoeud.addActionListener(new java.awt.event.ActionListener() {
@@ -277,18 +328,12 @@ public class mainWindow extends JFrame implements ActionListener {
 
     void ajouter() {
 
-        // ajoute les composants au JPanel principal
-        //getJContentPane().add(graphComponent);
-
-        /*Object v1 = graphx.addVertex( "Hello,", 20, 20, 80, 30);
-        Object v2 = graph.addVertex(parent, null, "World!", 200, 150, 80, 30);
-        Object e1 = graph.addEdge(parent, null, "", v1, v2);*/
-
+        v0 = graphx.getSelectionCell();
         graphx.getModel().beginUpdate();
         try {
             
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
-            Object v2 = graphx.insertVertex(parent, null, "World!", 240, 150, 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, "Enfant", 240+this.getX(), 150+this.getY(), 80, 30);
             graphx.insertEdge(parent, null, "Edge", v0, v2);
         } finally {
             graphx.getModel().endUpdate();
@@ -316,8 +361,11 @@ public class mainWindow extends JFrame implements ActionListener {
         jbtnNew = new JButton(icon1);
         jbtnOpen = new JButton(icon2);
         jbtnSave = new JButton(icon3);
-        jbtnExit = new JButton(icon4);
         jbtnCopy = new JButton(icon5);
+        jbtnExit = new JButton(icon4);
+        
+        
+        
 
         //Définit un titre pour notre fenêtre
         this.setTitle("Graphe");
