@@ -12,5 +12,7 @@ public class Operator{
         this.n1 = o;
     }
   
-
+    public String getName(){
+        return name;
+    }
 }

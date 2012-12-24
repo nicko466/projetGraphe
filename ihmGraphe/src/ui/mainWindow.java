@@ -33,6 +33,7 @@ import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultGraphModel;
 import um.*;
+import um.operation.Operator;
 
 public class mainWindow extends JFrame implements ActionListener {
 
@@ -43,6 +44,7 @@ public class mainWindow extends JFrame implements ActionListener {
     JPanel south;
     JGraph graph;
     mxGraph graphx;
+    String nomD;
     Object v0;
     mxGraphComponent graphComponent;
     Object parent;
@@ -245,6 +247,7 @@ public class mainWindow extends JFrame implements ActionListener {
 
                     diag = new Dialogue(mW, "Relation entre noeud");
 
+                    nomD = diag.getName();
                     //ajouter();
                     setCursor(curseurMain);
                 }
@@ -330,14 +333,15 @@ public class mainWindow extends JFrame implements ActionListener {
 
     void ajouter() {
 
-        v0 = graphx.getSelectionCell();        
-        graphx.getModel().beginUpdate();
+        v0 = graphx.getSelectionCell();  
         
+        
+        graphx.getModel().beginUpdate();
         try {
             
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
-            graphx.insertEdge(parent, null, "Edge", v0, v2);
+            graphx.insertEdge(parent, null, nomD, v0, v2);
         } finally {
             graphx.getModel().endUpdate();
         }
