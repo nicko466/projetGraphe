@@ -2,8 +2,11 @@ package um;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import um.operation.Binary;
 import um.operation.Operator;
 
@@ -18,8 +21,10 @@ public class Graphe {
   static final int scaleY = 12;
   static final int scaleX = 12;
 
-  public void Graphe() {
-        racine = new Noeud(Type.User, "Task_"+sommets.size(), 0, new Point(0,0));
+  public Graphe() {
+        racine = new Noeud(Type.User, "Task_0", 0, new Point(0,0));
+        sommets = new ArrayList<Noeud>();
+        aretes = new ArrayList<Arete>();
         sommets.add(racine);
         courant = racine;
         this.op = new ArrayList<Operator>();

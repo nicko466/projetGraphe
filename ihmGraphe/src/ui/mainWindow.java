@@ -42,7 +42,7 @@ public class mainWindow extends JFrame implements ActionListener {
     private JPanel jContentPane = null;
     JPanel north;
     JPanel south;
-    JGraph graph;
+    //JGraph graph;
     mxGraph graphx;
     String nomD;
     Object v0;
@@ -85,7 +85,7 @@ public class mainWindow extends JFrame implements ActionListener {
     JFileChooser choixFichier = new JFileChooser();
     Noeud noeud;
     Arete arete;
-    Graphe graphe;
+    Graphe graphe ;
     Dialogue diag;
     DefaultGraphCell myCell;
     Cursor curseurDefaut = new Cursor(Cursor.DEFAULT_CURSOR);
@@ -351,10 +351,10 @@ public class mainWindow extends JFrame implements ActionListener {
         graphx.getModel().beginUpdate();
         try {
             
+            graphe.add(Type.Interaction);
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
             graphx.insertEdge(parent, null,"", v0, v2);
-            graphe.add(Type.User);
         } finally {
             graphx.getModel().endUpdate();
         }
