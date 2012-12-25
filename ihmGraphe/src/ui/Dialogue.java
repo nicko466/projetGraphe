@@ -43,7 +43,8 @@ public class Dialogue extends JDialog implements ActionListener {
     String iconeArete;
     JLabel picture;
     JRadioButton op1;
-    JRadioButton op2;   
+    JRadioButton op2;
+    JRadioButton op3;
     DefaultGraphCell myCell;
     Binary rel;
     Graphe ope;
@@ -70,6 +71,10 @@ public class Dialogue extends JDialog implements ActionListener {
                                             mW.ajouter("Optionnal task");
                                             dispose();
                                         }
+                                        if(op3.isSelected()){
+                                            mW.ajouter("");
+                                            dispose();
+                                        }
 				}
 			});
 
@@ -78,18 +83,20 @@ public class Dialogue extends JDialog implements ActionListener {
         rep = new ButtonGroup();
         op1 = new JRadioButton("Iterative task");
         op2 = new JRadioButton("Optionnal task");
+        op3 = new JRadioButton("None");
         
         op1.setSelected(true);
         
         rep.add(op1);
         rep.add(op2);
-        
+        rep.add(op3);
         getContentPane().setLayout(new FlowLayout());
         panneauRadio.add(op2);
         panneauRadio.add(op1);
-        
+        panneauRadio.add(op3);
         op1.addActionListener(this);
         op2.addActionListener(this);
+        op3.addActionListener(this);
 
         onglet2.add(new JLabel("Choisir la relation : "), BorderLayout.NORTH);
 
