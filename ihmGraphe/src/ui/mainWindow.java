@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
@@ -368,10 +369,10 @@ public class mainWindow extends JFrame implements ActionListener {
     void ajouterBinaire() {
 
         Object v[] = graphx.getSelectionCells();
-        
         graphx.getModel().beginUpdate();
         try {
             graphx.insertEdge(parent, null,"", v[0], v[1]);
+           
         } finally {
             graphx.getModel().endUpdate();
         }
@@ -468,6 +469,10 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                
+            if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"enablinginfo", v[0], v[1]);
                 } finally {
@@ -482,6 +487,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"disabling", v[0], v[1]);
                 } finally {
@@ -496,6 +504,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"choice", v[0], v[1]);
                 } finally {
@@ -510,6 +521,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"enabling", v[0], v[1]);
                 } finally {
@@ -524,6 +538,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"fullsincro", v[0], v[1]);
                 } finally {
@@ -538,6 +555,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"interleave", v[0], v[1]);
                 } finally {
@@ -553,6 +573,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"sincro", v[0], v[1]);
                 } finally {
@@ -567,6 +590,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 setCursor(curseurMain);
                 Object v[] = graphx.getSelectionCells();
                 graphx.getModel().beginUpdate();
+                 if (l.get(v[0]).getLevel()!=l.get(v[1]).getLevel())
+                JOptionPane.showMessageDialog(null, "Attention impossible de créer une relation binaire entre deux noeuds de niveau différents");
+            else
                 try {
                     graphx.insertEdge(parent, null,"suspend", v[0], v[1]);
                 } finally {
