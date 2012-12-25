@@ -346,7 +346,7 @@ public class mainWindow extends JFrame implements ActionListener {
         graphx.getModel().beginUpdate();
         try {
             
-            graphe.add(Type.Interaction);
+//            graphe.add(Type.Interaction);
             //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", 240, 150, 80, 30);
             graphx.insertEdge(parent, null,"", v0, v2);
@@ -359,13 +359,9 @@ public class mainWindow extends JFrame implements ActionListener {
     void ajouterBinaire() {
 
         Object v[] = graphx.getSelectionCells();
-        
-        
         graphx.getModel().beginUpdate();
         try {
-            
             graphx.insertEdge(parent, null,"", v[0], v[1]);
-            
         } finally {
             graphx.getModel().endUpdate();
         }
@@ -424,7 +420,7 @@ public class mainWindow extends JFrame implements ActionListener {
         this.setTitle("Graphe");
 
         //fenêtre de taille 900 sur 500
-        this.setSize(900, 500);
+        this.setSize(1500,750);
 
         //ajoute les jToolBars
         south.add(getJToolBarV());      
@@ -445,30 +441,116 @@ public class mainWindow extends JFrame implements ActionListener {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
-                //v0 =graphx.getSelectionCell();
-
                 setCursor(curseurMain);
-                ajouterBinaire();
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"enablinginfo", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
             }
         });
         
         btn2.addActionListener(new java.awt.event.ActionListener() {
 
-            @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
-                //v0 =graphx.getSelectionCell();
-
-                graphx.removeCells();
                 setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"disabling", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
             }
-        });        
-            
+        });       
         
-        
-        
+        btn1.addActionListener(new java.awt.event.ActionListener() {
 
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"choice", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });          
+        
+        btn3.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"enabling", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });  
+        
+        btn5.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"fullsincro", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });          
+        
+        btn6.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"interleave", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });          
+        
+        
+        btn7.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"sincro", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });          
+
+        btn8.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                setCursor(curseurMain);
+                Object v[] = graphx.getSelectionCells();
+                graphx.getModel().beginUpdate();
+                try {
+                    graphx.insertEdge(parent, null,"suspend", v[0], v[1]);
+                } finally {
+                    graphx.getModel().endUpdate();
+                }
+            }
+        });          
+        
         this.setJMenuBar(getJJMenuBar());
 
 
