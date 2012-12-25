@@ -33,20 +33,12 @@ public class Dialogue extends JDialog implements ActionListener {
     /**
      * 
      */
-    JComboBox jComboBoxRel;
     JTabbedPane onglets;
-    JPanel onglet1;
     JPanel onglet2;
     ButtonGroup rep;
     Box panneauRadio;
-    String arete;
-    String iconeArete;
-    JLabel picture;
     JRadioButton op1;
     JRadioButton op2;   
-    DefaultGraphCell myCell;
-    Binary rel;
-    Graphe ope;
 
     mainWindow mW;
 
@@ -104,16 +96,6 @@ public class Dialogue extends JDialog implements ActionListener {
         setVisible(true);
 
     }
-
-    public void Actualiser() {
-
-        jComboBoxRel.removeAllItems();
-        for (int i = 0; i < ope.getOperator().size(); i++) {
-            Operator op = ope.getOperator().get(i);
-            jComboBoxRel.addItem(op);
-        }
-    }
-    
 
     public void actionPerformed(ActionEvent evt) {
         //picture.setIcon(new ImageIcon("images/" + op1.getActionCommand()+ ".jpg"));
