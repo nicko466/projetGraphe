@@ -114,6 +114,18 @@ public class Dialogue extends JDialog implements ActionListener {
             jComboBoxRel.addItem(op);
         }
     }
+    
+    public String getNom(){
+        if(op1.isSelected()){
+            String nom = "Iterative task";
+            return nom;
+        }
+        else{
+            String nom2 = "Optionnal task";
+            return nom2;
+        }
+         
+    }
 
     public void actionPerformed(ActionEvent evt) {
         //picture.setIcon(new ImageIcon("images/" + op1.getActionCommand()+ ".jpg"));

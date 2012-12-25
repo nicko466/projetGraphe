@@ -263,8 +263,7 @@ public class mainWindow extends JFrame implements ActionListener {
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
                     diag = new Dialogue(mW, "Relation entre noeud");
-
-                    //ajouter();
+                    nomD = diag.getNom();                    //ajouter();
                     setCursor(curseurMain);
                 }
             });
@@ -355,9 +354,15 @@ public class mainWindow extends JFrame implements ActionListener {
             System.out.println(" noeud : "+v0.toString());
             System.out.println(" racine : "+graphe.racine.toString());
 
-            graphe.add(Type.Interaction,1);
-            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
 
+           
+//            graphe.add(Type.Interaction,1);
+//            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+            //Object v2 = graphx.insertVertex(parent, null, "Enfant", 250, 300, 80, 30);
+
+            graphe.add(Type.Interaction,1);
+            Object v2 = graphx.insertVertex(parent, null, nomD, graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+            
 
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {
