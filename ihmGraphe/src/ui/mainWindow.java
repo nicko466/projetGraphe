@@ -354,9 +354,9 @@ public class mainWindow extends JFrame implements ActionListener {
         try {
 
            
-            graphe.add(Type.Interaction,1);
-            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
-
+//            graphe.add(Type.Interaction,1);
+//            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, "Enfant", 250, 300, 80, 30);
 
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {

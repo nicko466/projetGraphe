@@ -77,6 +77,7 @@ public class Dialogue extends JDialog implements ActionListener {
         panneauRadio = Box.createVerticalBox();
         rep = new ButtonGroup();
         op1 = new JRadioButton("Iterative task");
+        op1.setName(titre);
         op2 = new JRadioButton("Optionnal task");
         
         op1.setSelected(true);
