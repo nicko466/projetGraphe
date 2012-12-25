@@ -52,27 +52,12 @@ public class Dialogue extends JDialog implements ActionListener {
 
     Dialogue(final mainWindow mW, String titre) {
         super((JFrame) null, titre, true);
-
+        
         this.mW=mW;
-        onglets = new JTabbedPane(JTabbedPane.TOP);
-
-        onglet1 = new JPanel();
+        
         onglet2 = new JPanel();
+        add(onglet2);
         
-        
-        onglets.add("Opérateurs unaires",onglet2);
-        onglets.add("Opérateurs binaires",onglet1);
-        
-        this.add(onglets);
-
-        JButton bouton = new JButton("OK");
-        bouton.addActionListener(new java.awt.event.ActionListener() {
-				public void actionPerformed(java.awt.event.ActionEvent e) {
-					mW.ajouter();
-                                        dispose();
-				}
-			});
-
         JButton bouton2 = new JButton("OK");
         bouton2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -88,19 +73,11 @@ public class Dialogue extends JDialog implements ActionListener {
 				}
 			});
 
-
-        jComboBoxRel = new JComboBox();
-        //Actualiser();
-        jComboBoxRel.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
-        jComboBoxRel.addActionListener(this);
-
         
         panneauRadio = Box.createVerticalBox();
         rep = new ButtonGroup();
         op1 = new JRadioButton("Iterative task");
-        op1.setName("ghj");
         op2 = new JRadioButton("Optionnal task");
-        
         
         op1.setSelected(true);
         
@@ -114,12 +91,8 @@ public class Dialogue extends JDialog implements ActionListener {
         op1.addActionListener(this);
         op2.addActionListener(this);
 
-
-        onglet1.add(new JLabel("Choisir la relation : "), BorderLayout.NORTH);
         onglet2.add(new JLabel("Choisir la relation : "), BorderLayout.NORTH);
 
-        onglet1.add(jComboBoxRel, BorderLayout.NORTH);
-        onglet1.add(bouton);
 
         onglet2.add(panneauRadio);
         onglet2.add(bouton2, BorderLayout.LINE_END);
