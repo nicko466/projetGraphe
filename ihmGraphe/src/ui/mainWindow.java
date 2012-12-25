@@ -48,6 +48,7 @@ public class mainWindow extends JFrame implements ActionListener {
 
     mxGraph graphx;
     String nomD;
+    Noeud vTest;
     Object v0;
     mxGraphComponent graphComponent;
     Object parent;
@@ -196,8 +197,12 @@ public class mainWindow extends JFrame implements ActionListener {
             bar.setSize(new java.awt.Dimension(120, 40));
             bar.setPreferredSize(new java.awt.Dimension(200, 40));
             bar.setLocation(new java.awt.Point(25, 0));
-            bar.setFloatable(false);     
+            bar.setFloatable(false); 
+            
+            
 
+            bar.add(getBtnAjouter());
+            bar.add(getBtnSupprimer());  
         }
         return bar;
     }
@@ -342,15 +347,17 @@ public class mainWindow extends JFrame implements ActionListener {
 
     void ajouter() {
         
+        v0 = graphx.getSelectionCell(); 
 
-        v0 = graphx.getSelectionCell();
         graphx.getModel().beginUpdate();
         try {
             
-            System.out.println(" noeud : "+v0.toString());
-            System.out.println(" racine : "+graphe.racine.toString());
+            //System.out.println(" noeud : "+v0.toString());
+            //System.out.println(" racine : "+graphe.racine.toString());
+
             graphe.add(Type.Interaction,1);
             Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+
 
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {
@@ -362,6 +369,7 @@ public class mainWindow extends JFrame implements ActionListener {
     void ajouterBinaire() {
 
         Object v[] = graphx.getSelectionCells();
+        
         graphx.getModel().beginUpdate();
         try {
             graphx.insertEdge(parent, null,"", v[0], v[1]);
@@ -375,7 +383,7 @@ public class mainWindow extends JFrame implements ActionListener {
 
 
         
-        //graphe = new Graphe();
+        graphe = new Graphe();
 
         //initialisation des attributs
         north = new JPanel();
@@ -429,8 +437,7 @@ public class mainWindow extends JFrame implements ActionListener {
         south.add(getJToolBarV());      
         north.add(getJToolBarH());
         
-        south.add(getBtnAjouter());
-        south.add(getBtnSupprimer());  
+
         south.add(btn1);
         south.add(btn2);
         south.add(btn3);
