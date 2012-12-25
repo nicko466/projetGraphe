@@ -357,7 +357,7 @@ public class mainWindow extends JFrame implements ActionListener {
         graphx.getModel().beginUpdate();
         try {
              graphe.add(Type.Interaction,noeudSelectionné.getLevel()+1);
-            Object v2 = graphx.insertVertex(parent, null, nom, graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, nom+"\n"+graphe.sommets.get(graphe.sommets.size()-1).getName(), graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 35);
             l.put(v2, graphe.sommets.get(graphe.sommets.size()-1));
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {
@@ -620,7 +620,7 @@ public class mainWindow extends JFrame implements ActionListener {
 
         graphx.getModel().beginUpdate();
 
-        v0 = graphx.insertVertex(parent, null, "Racine", 400, 20, 80, 20);
+        v0 = graphx.insertVertex(parent, null, "Racine\n"+graphe.racine.getName(), 400, 20, 80, 35);
         
         graphx.getModel().endUpdate();
         l.put(v0, graphe.racine);
