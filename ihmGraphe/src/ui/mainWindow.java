@@ -29,6 +29,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.swing.text.Position;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultGraphCell;
 import org.jgraph.graph.DefaultGraphModel;
@@ -345,17 +346,18 @@ public class mainWindow extends JFrame implements ActionListener {
     }
 
     void ajouter() {
-
-        v0 = graphx.getSelectionCell(); 
         
+        v0 = graphx.getSelectionCell(); 
+
         
         graphx.getModel().beginUpdate();
         try {
-            
-//            graphe.add(Type.Interaction);
-            //Object v1 = graphx.insertVertex(parent, null, "Hello", 20, 20, 80, 30);
-            
-            Object v2 = graphx.insertVertex(parent, null, "fuck", 240, 150, 80, 30);
+
+           
+            graphe.add(Type.Interaction,1);
+            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+
+
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {
             graphx.getModel().endUpdate();
