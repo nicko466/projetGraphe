@@ -19,7 +19,7 @@ public class Graphe {
   public static ArrayList<Operator> op;
   
   static final int scaleY = 50;
-  static final int scaleX = 20;
+  static final int scaleX = 40;
 
   public Graphe() {
         racine = new Noeud(Type.User, "Task_0", 0, new Point(0,0));
@@ -32,7 +32,7 @@ public class Graphe {
 
   public void add(Type type,int niveau) {
         
-        Noeud noeud = new Noeud(type, "Task_"+sommets.size(),niveau, new Point(this.countLevel(sommets, niveau)*100+20, niveau*200+scaleY));
+        Noeud noeud = new Noeud(type, "Task_"+sommets.size(),niveau, new Point(this.countLevel(sommets, niveau)*100+scaleX, niveau*200+scaleY));
         sommets.add(noeud);
         aretes.add(new Arete(courant, noeud));//attention aux références
         courant = noeud;
