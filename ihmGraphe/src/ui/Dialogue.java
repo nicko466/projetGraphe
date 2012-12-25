@@ -62,12 +62,12 @@ public class Dialogue extends JDialog implements ActionListener {
         bouton2.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					if(op1.isSelected()){
-                                            
-                                            mW.ajouter();
+                                            mW.ajouter("Iterative task");
                                             dispose();
                                         } 
+                                        
                                         if(op2.isSelected()){
-                                            mW.ajouter();
+                                            mW.ajouter("Optionnal task");
                                             dispose();
                                         }
 				}
@@ -93,7 +93,6 @@ public class Dialogue extends JDialog implements ActionListener {
 
         onglet2.add(new JLabel("Choisir la relation : "), BorderLayout.NORTH);
 
-
         onglet2.add(panneauRadio);
         onglet2.add(bouton2, BorderLayout.LINE_END);
 
@@ -115,17 +114,6 @@ public class Dialogue extends JDialog implements ActionListener {
         }
     }
     
-    public String getNom(){
-        if(op1.isSelected()){
-            String nom = "Iterative task";
-            return nom;
-        }
-        else{
-            String nom2 = "Optionnal task";
-            return nom2;
-        }
-         
-    }
 
     public void actionPerformed(ActionEvent evt) {
         //picture.setIcon(new ImageIcon("images/" + op1.getActionCommand()+ ".jpg"));

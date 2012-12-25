@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -47,7 +48,6 @@ public class mainWindow extends JFrame implements ActionListener {
     //JGraph graph;
 
     mxGraph graphx;
-    String nomD;
     Noeud vTest;
     Object v0;
     mxGraphComponent graphComponent;
@@ -199,7 +199,7 @@ public class mainWindow extends JFrame implements ActionListener {
             bar.setLocation(new java.awt.Point(25, 0));
             bar.setFloatable(false); 
             
-            
+            bar.add(new JLabel(" Ajout/suppression : "), BorderLayout.PAGE_END);
 
             bar.add(getBtnAjouter());
             bar.add(getBtnSupprimer());  
@@ -237,6 +237,8 @@ public class mainWindow extends JFrame implements ActionListener {
                     mW.saveAs();
                 }
             });             
+            
+            
 
             north.add(jbtnNew);
             north.add(jbtnOpen);
@@ -262,8 +264,9 @@ public class mainWindow extends JFrame implements ActionListener {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent e) {
 
+                    
                     diag = new Dialogue(mW, "Relation entre noeud");
-                    nomD = diag.getNom();                    //ajouter();
+                    
                     setCursor(curseurMain);
                 }
             });
@@ -344,26 +347,16 @@ public class mainWindow extends JFrame implements ActionListener {
         }
     }
 
-    void ajouter() {
+    void ajouter(String nom) {
         
         v0 = graphx.getSelectionCell(); 
+        
 
         graphx.getModel().beginUpdate();
         try {
-            
-            //System.out.println(" noeud : "+v0.toString());
-            //System.out.println(" racine : "+graphe.racine.toString());
-
-
-           
-//            graphe.add(Type.Interaction,1);
-//            Object v2 = graphx.insertVertex(parent, null, "Enfant", graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
-            //Object v2 = graphx.insertVertex(parent, null, "Enfant", 250, 300, 80, 30);
-
             graphe.add(Type.Interaction,1);
-            Object v2 = graphx.insertVertex(parent, null, nomD, graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
+            Object v2 = graphx.insertVertex(parent, null, nom, graphe.sommets.get(graphe.sommets.size()-1).getPosition().x, graphe.sommets.get(graphe.sommets.size()-1).getPosition().y, 80, 30);
             
-
             graphx.insertEdge(parent, null,"", v0, v2);
         } finally {
             graphx.getModel().endUpdate();
@@ -429,6 +422,20 @@ public class mainWindow extends JFrame implements ActionListener {
         btn7 = new JButton(icon12);
         btn8 = new JButton(icon13);
         
+        jbtnNew.setToolTipText("Nouveau graphe");
+        jbtnOpen.setToolTipText("Ouvrir un graphe");
+        jbtnSave.setToolTipText("Sauvegarder");
+        jbtnCopy.setToolTipText("Copier");
+        jbtnExit.setToolTipText("Quitter");
+        btn1.setToolTipText("Relation 'Choice'");
+        btn2.setToolTipText("Relation 'disabling'");
+        btn3.setToolTipText("Relation 'enabling'");
+        btn4.setToolTipText("Relation 'enablinginfo'");
+        btn5.setToolTipText("Relation 'fullsincro'");
+        btn6.setToolTipText("Relation 'interleave'");
+        btn7.setToolTipText("Relation 'sincro'");
+        btn8.setToolTipText("Relation 'suspend'");
+        
         
         
 
@@ -443,6 +450,7 @@ public class mainWindow extends JFrame implements ActionListener {
         north.add(getJToolBarH());
         
 
+        south.add(new JLabel(" Relations binaires : "), BorderLayout.PAGE_END);
         south.add(btn1);
         south.add(btn2);
         south.add(btn3);
@@ -577,33 +585,17 @@ public class mainWindow extends JFrame implements ActionListener {
         this.setContentPane(getJContentPane());
 
         // initialise le graphe
-
         graphx = new mxGraph();
         Object parent = graphx.getDefaultParent();
-
-
-
 
         mxGraphComponent graphComponent = new mxGraphComponent(graphx);
         getContentPane().add(graphComponent);
 
-
-        // initialise les composants du graphe
-//        graphComponent = new mxGraphComponent(graphx);
-//        graphComponent.setSize(new Dimension(400, 400));
-
-        // ajoute les composants au JPanel principal
-        //getJContentPane().add(graphComponent);
-
-        // chargement du graphe avec une racine
         graphx.getModel().beginUpdate();
 
         v0 = graphx.insertVertex(parent, null, "Racine", 400, 20, 80, 20);
+        
         graphx.getModel().endUpdate();
-
-
-
-        //this.setContentPane(getContentPane());
 
         this.setVisible(true);
 
